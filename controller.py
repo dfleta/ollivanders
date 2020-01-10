@@ -6,6 +6,7 @@ from repo import initRepo
 
 tienda = initRepo()
 
+
 app = Flask(__name__)
 api = Api(app)
 

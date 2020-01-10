@@ -1,26 +1,6 @@
-from domain import *
+
+from gilded_rose_refactorizado import *
 from accesoCasosTexttest_deudatecnica_saneada import *
-
-
-def initRepo():
-
-    rutaAccesoFichero = "stdout_bug_conjured.gr"
-
-    matrizCasosTest = []
-
-    matrizCasosTest = accesoCasosTexttest(matrizCasosTest, rutaAccesoFichero)
-
-    items = extraerItemsIventario(matrizCasosTest)
-
-    inventario = []
-    for item in items:
-        objetoItem = crearObjetoItem(item)
-        assert isinstance(objetoItem.sell_in, int)
-        assert isinstance(objetoItem.quality, int)
-        inventario.append(objetoItem)
-
-    tienda = GildedRose(inventario)
-    return tienda
 
 
 def extraerItemsIventario(matrizCasosTest):
@@ -72,3 +52,29 @@ def test(tienda, estadoInventario):
             valorPropiedadCasoTest = estadoInventario[offset][i]
             assert getattr(item, propiedad) == valorPropiedadCasoTest, \
                 "falla %s %s %s" % (propiedad, estadoInventario[offset][i], item.__class__.__name__)
+
+
+if __name__ == "__main__":
+
+    rutaAccesoFichero = "stdout_bug_conjured.gr"
+
+    matrizCasosTest = []
+
+    matrizCasosTest = accesoCasosTexttest(matrizCasosTest, rutaAccesoFichero)
+
+    items = extraerItemsIventario(matrizCasosTest)
+
+    inventario = []
+    for item in items:
+        objetoItem = crearObjetoItem(item)
+        assert isinstance(objetoItem.sell_in, int)
+        assert isinstance(objetoItem.quality, int)
+        inventario.append(objetoItem)
+
+    tienda = GildedRose(inventario)
+
+    for dia in range(1, len(matrizCasosTest)):
+        print('\n' + '#' * 5 + " Items en la tienda DIA %d " % dia + '#' * 5 + '\n')
+        tienda.update_quality()
+        estadoInventario = matrizCasosTest[dia]
+        test(tienda, estadoInventario)
