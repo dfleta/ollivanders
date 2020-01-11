@@ -6,6 +6,6 @@ def getInventario(tienda):
     items = tienda.getItems()
 
     for item in items:
-        inventario[item.name] = {'sell_in': item.sell_in, 'quality': item.quality}
-
+        # inventario[item.name] = {'sell_in': item.sell_in, 'quality': item.quality}
+        inventario[item.name] = item.__dict__
     return inventario
