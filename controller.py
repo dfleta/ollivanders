@@ -1,11 +1,10 @@
 from flask import Flask
 from flask_restful import Resource, Api
 
-from service import getInventario
-from repo import initRepo
-
-tienda = initRepo()
-
+from repository.repo import initRepo
+from resources.inventario import Inventario
+from resources.updateQuality import UpdateQuality
+from config import *
 
 app = Flask(__name__)
 api = Api(app)
@@ -15,19 +14,6 @@ class Ollivanders(Resource):
 
     def get(self):
         return {'Welcome!': 'Ollivanders'}
-
-
-class Inventario(Resource):
-
-    def get(self):
-        # return {'Inventario': 'Ollivanders'}
-        return getInventario(tienda)
-
-
-class UpdateQuality(Resource):
-
-    def get(self):
-        return {'updated': 'Items'}
 
 
 api.add_resource(Ollivanders, '/')

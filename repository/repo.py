@@ -1,10 +1,10 @@
-from app.domain import *
-from app.accesoCasosTexttest_deudatecnica_saneada import *
+from domain.types import *
+from domain.accesoCasosTexttest_deudatecnica_saneada import *
 
 
 def initRepo():
 
-    rutaAccesoFichero = "app/stdout_bug_conjured.gr"
+    rutaAccesoFichero = "domain/stdout_bug_conjured.gr"
 
     matrizCasosTest = []
 
