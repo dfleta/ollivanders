@@ -1,5 +1,5 @@
 from domain.types import *
-from domain.accesoCasosTexttest_deudatecnica_saneada import *
+from domain.accesoCasosTexttest import *
 
 
 class SingletonOllivander():
