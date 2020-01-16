@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_restful import Resource, Api
 
-from repository.repo import initRepo
 from resources.inventario import Inventario
 from resources.updateQuality import UpdateQuality
 from config import *

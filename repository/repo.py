@@ -2,73 +2,79 @@ from domain.types import *
 from domain.accesoCasosTexttest_deudatecnica_saneada import *
 
 
-def initRepo():
+class SingletonOllivander():
 
-    rutaAccesoFichero = "domain/stdout_bug_conjured.gr"
+    instanciaTienda = None
 
-    matrizCasosTest = []
+    def crearTienda():
+        if not SingletonOllivander.instanciaTienda:
+            SingletonOllivander.instanciaTienda = SingletonOllivander.initRepo()
+        return SingletonOllivander.instanciaTienda
 
-    matrizCasosTest = accesoCasosTexttest(matrizCasosTest, rutaAccesoFichero)
+    def initRepo():
 
-    items = extraerItemsIventario(matrizCasosTest)
+        rutaAccesoFichero = "domain/stdout_bug_conjured.gr"
 
-    inventario = []
-    for item in items:
-        objetoItem = crearObjetoItem(item)
-        assert isinstance(objetoItem.sell_in, int)
-        assert isinstance(objetoItem.quality, int)
-        inventario.append(objetoItem)
+        matrizCasosTest = []
 
-    tienda = GildedRose(inventario)
-    return tienda
+        matrizCasosTest = accesoCasosTexttest(matrizCasosTest, rutaAccesoFichero)
 
+        items = SingletonOllivander.extraerItemsIventario(matrizCasosTest)
 
-def extraerItemsIventario(matrizCasosTest):
-    """
-    Extrae los items y el estado en el que están el primer dia
-    de los casos test y devuelve una lista de items:
-    items = [ [item], [item], [item] ]
+        inventario = []
+        for item in items:
+            objetoItem = SingletonOllivander.crearObjetoItem(item)
+            assert isinstance(objetoItem.sell_in, int)
+            assert isinstance(objetoItem.quality, int)
+            inventario.append(objetoItem)
 
-    Argumentos:
-    matrizCasostest -> lista con los casos test. Cada elemento es un dia
-    """
-    return matrizCasosTest[0]
+        tienda = GildedRose(inventario)
+        return tienda
 
+    def extraerItemsIventario(matrizCasosTest):
+        """
+        Extrae los items y el estado en el que están el primer dia
+        de los casos test y devuelve una lista de items:
+        items = [ [item], [item], [item] ]
 
-def crearObjetoItem(item):
-    """
-    Devuelve un objeto de la clase Item.
+        Argumentos:
+        matrizCasostest -> lista con los casos test. Cada elemento es un dia
+        """
+        return matrizCasosTest[0]
 
-    Es necesario convertir la segunda y tercera propiedad a int.
+    def crearObjetoItem(item):
+        """
+        Devuelve un objeto de la clase Item.
 
-    Argumentos:
-    item = ['Elixir of the Mongoose', ' 5', ' 7']
-    """
-    diccionarioClases = {"Sulfuras, Hand of Ragnaros": "Sulfuras",
-                         "Aged Brie": "AgedBrie",
-                         "Backstage passes to a TAFKAL80ETC concert": "Backstage",
-                         "Conjured Mana Cake": "ConjuredItem",
-                         "+5 Dexterity Vest": "ConjuredItem",
-                         "Normal Item": "NormalItem"}
+        Es necesario convertir la segunda y tercera propiedad a int.
 
-    try:
-        nombreItem = item[0]
-        clase = diccionarioClases[nombreItem]
-    except KeyError:
-        clase = diccionarioClases["Normal Item"]
-    finally:
-        return eval(clase + str(tuple(item)))
+        Argumentos:
+        item = ['Elixir of the Mongoose', ' 5', ' 7']
+        """
+        diccionarioClases = {"Sulfuras, Hand of Ragnaros": "Sulfuras",
+                            "Aged Brie": "AgedBrie",
+                            "Backstage passes to a TAFKAL80ETC concert": "Backstage",
+                            "Conjured Mana Cake": "ConjuredItem",
+                            "+5 Dexterity Vest": "ConjuredItem",
+                            "Normal Item": "NormalItem"}
 
+        try:
+            nombreItem = item[0]
+            clase = diccionarioClases[nombreItem]
+        except KeyError:
+            clase = diccionarioClases["Normal Item"]
+        finally:
+            return eval(clase + str(tuple(item)))
 
-def test(tienda, estadoInventario):
+    def test(tienda, estadoInventario):
 
-    nombrePropiedadesItem = ["name", "sell_in", "quality"]
-    numeroPropiedadesItem = len(nombrePropiedadesItem)
+        nombrePropiedadesItem = ["name", "sell_in", "quality"]
+        numeroPropiedadesItem = len(nombrePropiedadesItem)
 
-    for (offset, item) in enumerate(tienda.items):
-        print(item)
-        for i in range(1, numeroPropiedadesItem):
-            propiedad = nombrePropiedadesItem[i]
-            valorPropiedadCasoTest = estadoInventario[offset][i]
-            assert getattr(item, propiedad) == valorPropiedadCasoTest, \
-                "falla %s %s %s" % (propiedad, estadoInventario[offset][i], item.__class__.__name__)
+        for (offset, item) in enumerate(tienda.items):
+            print(item)
+            for i in range(1, numeroPropiedadesItem):
+                propiedad = nombrePropiedadesItem[i]
+                valorPropiedadCasoTest = estadoInventario[offset][i]
+                assert getattr(item, propiedad) == valorPropiedadCasoTest, \
+                    "falla %s %s %s" % (propiedad, estadoInventario[offset][i], item.__class__.__name__)
