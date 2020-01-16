@@ -3,19 +3,13 @@ from flask_restful import Resource, Api
 
 from resources.inventario import Inventario
 from resources.updateQuality import UpdateQuality
+from resources.root import Root
 from config import *
 
 app = Flask(__name__)
 api = Api(app)
 
-
-class Ollivanders(Resource):
-
-    def get(self):
-        return {'Welcome!': 'Ollivanders'}
-
-
-api.add_resource(Ollivanders, '/')
+api.add_resource(Root, '/')
 api.add_resource(Inventario, '/inventario')
 api.add_resource(UpdateQuality, '/updateQuality')
 
