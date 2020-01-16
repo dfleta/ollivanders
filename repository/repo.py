@@ -8,22 +8,25 @@ class SingletonOllivander():
 
     def crearTienda():
         if not SingletonOllivander.instanciaTienda:
-            SingletonOllivander.instanciaTienda = SingletonOllivander.initRepo()
+            SingletonOllivander.instanciaTienda = Factory.initRepo()
         return SingletonOllivander.instanciaTienda
+
+
+class Factory():
+
+    rutaAccesoFichero = "domain/stdout_bug_conjured.gr"
 
     def initRepo():
 
-        rutaAccesoFichero = "domain/stdout_bug_conjured.gr"
-
         matrizCasosTest = []
 
-        matrizCasosTest = accesoCasosTexttest(matrizCasosTest, rutaAccesoFichero)
+        matrizCasosTest = accesoCasosTexttest(matrizCasosTest, Factory.rutaAccesoFichero)
 
-        items = SingletonOllivander.extraerItemsIventario(matrizCasosTest)
+        items = Factory.extraerItemsIventario(matrizCasosTest)
 
         inventario = []
         for item in items:
-            objetoItem = SingletonOllivander.crearObjetoItem(item)
+            objetoItem = Factory.crearObjetoItem(item)
             assert isinstance(objetoItem.sell_in, int)
             assert isinstance(objetoItem.quality, int)
             inventario.append(objetoItem)
@@ -52,11 +55,11 @@ class SingletonOllivander():
         item = ['Elixir of the Mongoose', ' 5', ' 7']
         """
         diccionarioClases = {"Sulfuras, Hand of Ragnaros": "Sulfuras",
-                            "Aged Brie": "AgedBrie",
-                            "Backstage passes to a TAFKAL80ETC concert": "Backstage",
-                            "Conjured Mana Cake": "ConjuredItem",
-                            "+5 Dexterity Vest": "ConjuredItem",
-                            "Normal Item": "NormalItem"}
+                             "Aged Brie": "AgedBrie",
+                             "Backstage passes to a TAFKAL80ETC concert": "Backstage",
+                             "Conjured Mana Cake": "ConjuredItem",
+                             "+5 Dexterity Vest": "ConjuredItem",
+                             "Normal Item": "NormalItem"}
 
         try:
             nombreItem = item[0]
