@@ -1,3 +1,5 @@
+###### Requirements with Version Specifiers ######
+#   See https://www.python.org/dev/peps/pep-0440/#version-specifiers
 aniso8601==8.0.0
 astroid==2.3.3
 Click==7.0
