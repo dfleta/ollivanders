@@ -32,7 +32,7 @@ setuptools.setup(
         'lazy-object-proxy==1.4.3',
         'MarkupSafe==1.1.1',
         'mccabe==0.6.1',
-        'pkg-resources==0.0.0',
+        'pkg-resources>=0.0.0',
         'pycodestyle==2.5.0',
         'pylint==2.4.4',
         'pytz==2019.3',
