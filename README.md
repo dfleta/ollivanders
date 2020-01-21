@@ -17,14 +17,14 @@
 
 - Clona el projecto:
 
-    `git clone https://github.com/dfleta/api-rest-gildedrose.git`
+    `$ git clone https://github.com/dfleta/api-rest-gildedrose.git`
 
 - Inicializa el entorno virtual e instala dependencias:
 
-    ```
+    ```bash
     $ python3.6 -m venv venv
     $ source venv/bin/activate
-    $ pip3 install -r dependencies.txt
+    (venv) $ pip3 install -r requirements.txt
     ```
 
 
@@ -43,10 +43,11 @@
 
 - Inicializa el entorno virtual y actívalo.
 
-    ```
+    ```bash
     $ python3.6 -m venv venv
     $ source venv/bin/activate
     ```
+    
 - Instala el proyecto:
 
     `$ pip3 install API_REST_GildedRose-0.0.1-py3-none-any.whl`
