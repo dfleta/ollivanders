@@ -1,13 +1,22 @@
 
+from flask import Response
+from flask_restful import fields, marshal_with
+
+
 class Service():
 
-    def getInventario(tienda):
-        inventario = {}
-        items = tienda.getItems()
+    resource_fields = {
+            'name': fields.String,
+            'sell_in': fields.Integer,
+            'quality': fields.Integer
+    }
 
-        for item in items:
-            inventario[item.name] = item.__dict__
-        return inventario
+    @marshal_with(resource_fields)
+    def getInventario(Item):
+        listItems = []
+        for item in Item.objects():
+            listItems.append(item)
+        return listItems
 
     def updateQuality(tienda):
         tienda.update_quality()
