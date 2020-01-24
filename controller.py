@@ -6,9 +6,15 @@ from resources.updateQuality import UpdateQuality
 from resources.root import Root
 from config import *
 
-app = Flask(__name__)
-api = Api(app)
+# from repository.db import initialize_db
+# from flask_mongoengine import MongoEngine
+# from repository.models import Item
+from repository.db import *
 
+app = Flask(__name__)
+
+# API REST
+api = Api(app)
 api.add_resource(Root, '/')
 api.add_resource(Inventario, '/inventario')
 api.add_resource(UpdateQuality, '/updateQuality')
