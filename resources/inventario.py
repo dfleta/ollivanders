@@ -1,5 +1,4 @@
 from flask_restful import Resource, Api
-# from config import tienda
 from repository.models import Item
 from services.service import Service
 

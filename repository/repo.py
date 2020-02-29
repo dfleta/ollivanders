@@ -6,6 +6,7 @@ class SingletonOllivander():
 
     instanciaTienda = None
 
+    @staticmethod
     def crearTienda():
         if not SingletonOllivander.instanciaTienda:
             SingletonOllivander.instanciaTienda = Factory.initRepo()
@@ -16,11 +17,13 @@ class Factory():
 
     rutaAccesoFichero = "domain/stdout_bug_conjured.gr"
 
+    @staticmethod
     def initRepo():
 
         matrizCasosTest = []
 
-        matrizCasosTest = accesoCasosTexttest(matrizCasosTest, Factory.rutaAccesoFichero)
+        matrizCasosTest = accesoCasosTexttest(
+            matrizCasosTest, Factory.rutaAccesoFichero)
 
         items = Factory.extraerItemsIventario(matrizCasosTest)
 
@@ -34,6 +37,7 @@ class Factory():
         tienda = GildedRose(inventario)
         return tienda
 
+    @staticmethod
     def extraerItemsIventario(matrizCasosTest):
         """
         Extrae los items y el estado en el que están el primer dia
@@ -45,6 +49,7 @@ class Factory():
         """
         return matrizCasosTest[0]
 
+    @staticmethod
     def crearObjetoItem(item):
         """
         Devuelve un objeto de la clase Item.
@@ -69,6 +74,7 @@ class Factory():
         finally:
             return eval(clase + str(tuple(item)))
 
+    @staticmethod
     def test(tienda, estadoInventario):
 
         nombrePropiedadesItem = ["name", "sell_in", "quality"]
@@ -80,4 +86,5 @@ class Factory():
                 propiedad = nombrePropiedadesItem[i]
                 valorPropiedadCasoTest = estadoInventario[offset][i]
                 assert getattr(item, propiedad) == valorPropiedadCasoTest, \
-                    "falla %s %s %s" % (propiedad, estadoInventario[offset][i], item.__class__.__name__)
+                    "falla %s %s %s" % (
+                        propiedad, estadoInventario[offset][i], item.__class__.__name__)

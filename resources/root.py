@@ -6,5 +6,5 @@ from repository.models import Item
 class Root(Resource):
 
     def get(self):
-        # return {'Welcome!': 'Ollivanders'}
-        return Item.objects().to_json()
+        return {'Welcome!': 'Ollivanders'}
+        # return Item.objects().to_json()

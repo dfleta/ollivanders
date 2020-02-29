@@ -1,6 +1,6 @@
 
-from gilded_rose_refactorizado import *
-from accesoCasosTexttest import *
+from domain.types import *
+from domain.accesoCasosTexttest import *
 
 
 def extraerItemsIventario(matrizCasosTest):
