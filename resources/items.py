@@ -5,12 +5,28 @@ from services.service import Service
 
 class Items(Resource):
 
+    # /items/<itemName>
     def get(self, itemName):
         return Service.getItem(Item, itemName)
 
     def post(self):
-        # curl -d name="Conjured Mana Cake" -d sell_in=3 -d quality=6 http://127.0.0.1:5000/items
-        # validar el objeto flask.Request.values
+        # curl -d name="Conjured Mana Cake" -d sell_in=3 -d quality=6
+        # http://127.0.0.1:5000/items -X POST
+        args = self.parseRequest()
+
+        # 201 response: request has succeeded and
+        # a new resource has been created as a result.
+        return Service.postItem(Item, args), 201
+
+    def delete(self):
+        # curl -d name="Conjured Mana Cake" -d sell_in=3 -d quality=6
+        # http://127.0.0.1:5000/items -X DELETE
+        args = self.parseRequest()
+        return Service.deleteItem(Item, args)
+        return '', 204
+
+    def parseRequest(self):
+        # Validar el objeto flask.Request.values
         # o flask.Request.json
         parser = reqparse.RequestParser(bundle_errors=True)
         parser.add_argument('name', type=str, required=True,
@@ -19,9 +35,7 @@ class Items(Resource):
                             help='sellIn required')
         parser.add_argument('quality', type=int, required=True,
                             help='quality required')
-        # args es un diccionario con los argumentos
+        # args = parser.parse_args() 
+        # es un diccionario con los argumentos
         # especificados como keys
-        args = parser.parse_args()
-        # 201 response: request has succeeded and
-        # a new resource has been created as a result.
-        return Service.postItem(Item, args), 201
+        return parser.parse_args()

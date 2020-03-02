@@ -2,6 +2,7 @@
 from flask import Response
 from flask_restful import fields, marshal_with, abort
 from repository.models import Item
+from mongoengine.queryset.visitor import Q
 
 from domain.test_gilded_rose import crearObjetoItem
 
@@ -60,3 +61,23 @@ class Service():
         item.sell_in = args['sell_in']
         item.quality = args['quality']
         item.save()
+
+    @staticmethod
+    @marshal_with(resource_fields)
+    def filterQuality(Item, itemQuality):
+        listItems = []
+        for item in Item.objects(Q(quality=itemQuality)):
+            listItems.append(item)
+        if not listItems:
+            abort(404, message="No existen items que satisfagan criterios")
+        return listItems
+
+    @staticmethod
+    def deleteItem(Item, args):
+        item = Item.objects(Q(name=args['name'])
+                            & Q(sell_in=args['sell_in'])
+                            & Q(quality=args['quality']))
+        if not item:
+            abort(404, message="No existe el item")
+        else:
+            item.delete()

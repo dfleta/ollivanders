@@ -5,6 +5,8 @@ from resources.inventario import Inventario
 from resources.updateQuality import UpdateQuality
 from resources.root import Root
 from resources.items import Items
+from resources.quality import Quality
+
 # from config import *
 
 # from repository.db import initialize_db
@@ -20,6 +22,7 @@ api.add_resource(Root, '/')
 api.add_resource(Inventario, '/inventario')
 api.add_resource(UpdateQuality, '/update-quality')
 api.add_resource(Items, '/items/<itemName>', '/items')
+api.add_resource(Quality, '/items/quality/<itemQuality>')
 
 
 if __name__ == '__main__':
