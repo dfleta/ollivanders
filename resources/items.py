@@ -5,8 +5,9 @@ from services.service import Service
 
 class Items(Resource):
 
-    # /items/<itemName>
+    # /items/name/<itemName>
     def get(self, itemName):
+        # curl http://localhost:5000/items/name/"Aged%20Brie"
         return Service.getItem(Item, itemName)
 
     def post(self):

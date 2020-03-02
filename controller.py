@@ -21,7 +21,7 @@ api = Api(app)
 api.add_resource(Root, '/')
 api.add_resource(Inventario, '/inventario')
 api.add_resource(UpdateQuality, '/update-quality')
-api.add_resource(Items, '/items/<itemName>', '/items')
+api.add_resource(Items, '/items/name/<itemName>', '/items')
 api.add_resource(Quality, '/items/quality/<itemQuality>')
 
 
