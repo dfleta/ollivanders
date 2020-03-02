@@ -33,27 +33,29 @@ class Service():
             item.quality = itemObject.quality
             item.save()
 
-        # ayudaria un id en el objeto para
-        # encontrarlo en la base de datos
+        # los documentos en la bbdd tienen un id
+        # creado de manera automatica
+        # En la salida no aparece porque al
+        # marshalizar el documento no he tenido
+        # en cuenta este campo
 
         return Service.inventario(Item)
 
     @staticmethod
     @marshal_with(resource_fields)
     def getItem(Item, itemName):
+        # Hay que resolver el tema del espacio
+        # en blanco en la url en Aged%20Brie
+        # De momento usar %20 como espacio
+
         # objects(name="Aged Brie") = QuerySet that will
         # only iterate over items =>
         # devuelve una coleccion => recogerla en lista
         # antes de devolver
-        listItems = []
-        for item in Item.objects(name=itemName):
-            listItems.append(item)
-            # Hay que resolver el tema del espacio
-            # en blanco en la url en aged brie
-            # De momento usar %20 como espacio
-        if not listItems:
+        items = Item.objects(name=itemName)
+        if not items:
             abort(404, message="El item {} no existe".format(itemName))
-        return listItems
+        return list(items)
 
     @staticmethod
     def postItem(Item, args):
@@ -61,16 +63,6 @@ class Service():
         item.sell_in = args['sell_in']
         item.quality = args['quality']
         item.save()
-
-    @staticmethod
-    @marshal_with(resource_fields)
-    def filterQuality(Item, itemQuality):
-        listItems = []
-        for item in Item.objects(Q(quality=itemQuality)):
-            listItems.append(item)
-        if not listItems:
-            abort(404, message="No existen items que satisfagan criterios")
-        return listItems
 
     @staticmethod
     def deleteItem(Item, args):
@@ -81,3 +73,21 @@ class Service():
             abort(404, message="No existe el item")
         else:
             item.delete()
+
+    @staticmethod
+    @marshal_with(resource_fields)
+    def filterQuality(Item, itemQuality):
+        items = Item.objects(quality=itemQuality)
+        return Service.check(items)
+
+    @staticmethod
+    @marshal_with(resource_fields)
+    def filterSellIn(Item, itemSellIn):
+        items = Item.objects(sell_in__lte=itemSellIn)
+        return Service.check(items)
+
+    @staticmethod
+    def check(items):
+        if not items:
+            abort(404, message="No existen items que satisfagan el criterio")
+        return list(items)

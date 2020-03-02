@@ -36,7 +36,7 @@ class Items(Resource):
                             help='sellIn required')
         parser.add_argument('quality', type=int, required=True,
                             help='quality required')
-        # args = parser.parse_args() 
+        # args = parser.parse_args()
         # es un diccionario con los argumentos
         # especificados como keys
         return parser.parse_args()
