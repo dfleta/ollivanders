@@ -1,6 +1,6 @@
 
 from flask import Response
-from flask_restful import fields, marshal_with
+from flask_restful import fields, marshal_with, abort
 from repository.models import Item
 
 from domain.test_gilded_rose import crearObjetoItem
@@ -47,9 +47,11 @@ class Service():
         listItems = []
         for item in Item.objects(name=itemName):
             listItems.append(item)
-            # hay que resolver el tema del espacio
+            # Hay que resolver el tema del espacio
             # en blanco en la url en aged brie
-            # de momento usar %20 como espacio
+            # De momento usar %20 como espacio
+        if not listItems:
+            abort(404, message="El item {} no existe".format(itemName))
         return listItems
 
     @staticmethod

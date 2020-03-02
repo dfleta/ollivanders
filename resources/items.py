@@ -22,4 +22,6 @@ class Items(Resource):
         # args es un diccionario con los argumentos
         # especificados como keys
         args = parser.parse_args()
-        Service.postItem(Item, args)
+        # 201 response: request has succeeded and
+        # a new resource has been created as a result.
+        return Service.postItem(Item, args), 201
