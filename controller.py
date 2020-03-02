@@ -4,7 +4,8 @@ from flask_restful import Resource, Api
 from resources.inventario import Inventario
 from resources.updateQuality import UpdateQuality
 from resources.root import Root
-from config import *
+from resources.items import Items
+# from config import *
 
 # from repository.db import initialize_db
 # from flask_mongoengine import MongoEngine
@@ -17,7 +18,8 @@ app = Flask(__name__)
 api = Api(app)
 api.add_resource(Root, '/')
 api.add_resource(Inventario, '/inventario')
-api.add_resource(UpdateQuality, '/updateQuality')
+api.add_resource(UpdateQuality, '/update-quality')
+api.add_resource(Items, '/items/<itemName>')
 
 
 if __name__ == '__main__':
