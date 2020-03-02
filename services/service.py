@@ -51,3 +51,10 @@ class Service():
             # en blanco en la url en aged brie
             # de momento usar %20 como espacio
         return listItems
+
+    @staticmethod
+    def postItem(Item, args):
+        item = Item(name=args['name'])
+        item.sell_in = args['sell_in']
+        item.quality = args['quality']
+        item.save()

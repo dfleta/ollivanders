@@ -27,7 +27,8 @@ inventario = [["+5 Dexterity Vest", 10, 20],
               ["Backstage passes to a TAFKAL80ETC concert", 15, 20],
               ["Backstage passes to a TAFKAL80ETC concert", 10, 49],
               ["Backstage passes to a TAFKAL80ETC concert", 5, 49],
-              ["Conjured Mana Cake", 3, 6]]
+              # ["Conjured Mana Cake", 3, 6]
+              ]
 
 for product in inventario:
     item = Item(name=product[0])
