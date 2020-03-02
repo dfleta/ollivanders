@@ -76,7 +76,7 @@ class Service():
     def deleteItem(Item, args):
         item = Item.objects(Q(name=args['name'])
                             & Q(sell_in=args['sell_in'])
-                            & Q(quality=args['quality']))
+                            & Q(quality=args['quality'])).first()
         if not item:
             abort(404, message="No existe el item")
         else:
