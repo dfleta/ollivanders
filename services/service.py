@@ -16,7 +16,7 @@ class Service():
 
     @staticmethod
     @marshal_with(resource_fields)
-    def getInventario(Item):
+    def inventario(Item):
         listItems = []
         for item in Item.objects():
             listItems.append(item)
@@ -35,7 +35,7 @@ class Service():
         # ayudaria un id en el objeto para
         # encontrarlo en la base de datos
 
-        return Service.getInventario(Item)
+        return Service.inventario(Item)
 
     @staticmethod
     @marshal_with(resource_fields)
