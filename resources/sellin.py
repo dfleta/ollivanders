@@ -10,4 +10,4 @@ class SellIn(Resource):
     # ha de ser igual que el del parametro del get()
     # get(self, itemSellIn)
     def get(self, itemSellIn):
-        return Service.filterSellIn(Item, itemSellIn)
+        return Service.filterSellIn(Item, itemSellIn), 200

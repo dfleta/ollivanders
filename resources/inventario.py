@@ -6,7 +6,7 @@ from services.service import Service
 class Inventario(Resource):
 
     def get(self):
-        return Service.inventario(Item)
+        return Service.inventario(Item), 200
 
     def post(self):
         pass
