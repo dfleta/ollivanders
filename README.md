@@ -1,4 +1,4 @@
-# Practica API REST con Flask
+# API REST con Flask y Mongo Atlas
 
 ## Instala el proyecto
 
@@ -27,7 +27,6 @@
     (venv) $ pip3 install -r requirements.txt
     ```
 
-
 ### Como distribución
 
 - Crea el directorio y sitúate en él:
@@ -53,5 +52,20 @@
     `$ pip3 install API_REST_GildedRose-0.0.1-py3-none-any.whl`
 
 
+### Prepara tu proyecto para distribuirlo
 
+1. Instala las `setuptools`
 
+    `$ pip install setuptools`
+
+2. Instala el paquete `wheel`
+
+    `$ pip3 install wheel`
+
+2. Prepara el fichero `setup.py`
+
+    [Flask tutorial deploy](https://flask.palletsprojects.com/en/1.1.x/tutorial/deploy/)
+
+3. Genera el fichero de distribución:
+
+    `$ python setup.py bdist_wheel` 
