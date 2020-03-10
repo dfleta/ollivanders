@@ -1,8 +1,9 @@
 
-from flask import Response
+from flask import Response, g
 from flask_restful import fields, marshal_with, abort
-from repository.models import Item
+# from repository.models import Item
 from mongoengine.queryset.visitor import Q
+from repository.db_atlas import get_db
 
 from domain.test_gilded_rose import crearObjetoItem
 
@@ -17,15 +18,20 @@ class Service():
 
     @staticmethod
     @marshal_with(resource_fields)
-    def inventario(Item):
+    def inventario():
+        db = get_db()
+        # devuelve db = g.db = connect() y g.Item = Item
+        # Al invocar Item() encuentra a db, la referencia
+        # a la conexión a la bbdd, en el contexto global
         listItems = []
-        for item in Item.objects():
+        for item in g.Item.objects():
             listItems.append(item)
         return listItems
 
     @staticmethod
-    def updateQuality(Item):
-        for item in Item.objects():
+    def updateQuality():
+        db = get_db()
+        for item in g.Item.objects():
             itemObject = crearObjetoItem(
                 [item.name, item.sell_in, item.quality])
             itemObject.update_quality()
@@ -39,11 +45,11 @@ class Service():
         # marshalizar el documento no he tenido
         # en cuenta este campo
 
-        return Service.inventario(Item)
+        return Service.inventario()
 
     @staticmethod
     @marshal_with(resource_fields)
-    def getItem(Item, itemName):
+    def getItem(itemName):
         # Hay que resolver el tema del espacio
         # en blanco en la url en Aged%20Brie
         # De momento usar %20 como espacio
@@ -52,23 +58,26 @@ class Service():
         # only iterate over items =>
         # devuelve una coleccion => recogerla en lista
         # antes de devolver
-        items = Item.objects(name=itemName)
+        db = get_db()
+        items = g.Item.objects(name=itemName)
         if not items:
             abort(404, message="El item {} no existe".format(itemName))
         return list(items)
 
     @staticmethod
-    def postItem(Item, args):
-        item = Item(name=args['name'])
+    def postItem(args):
+        db = get_db()
+        item = g.Item(name=args['name'])
         item.sell_in = args['sell_in']
         item.quality = args['quality']
         item.save()
 
     @staticmethod
-    def deleteItem(Item, args):
-        item = Item.objects(Q(name=args['name'])
-                            & Q(sell_in=args['sell_in'])
-                            & Q(quality=args['quality'])).first()
+    def deleteItem(args):
+        db = get_db()
+        item = g.Item.objects(Q(name=args['name'])
+                              & Q(sell_in=args['sell_in'])
+                              & Q(quality=args['quality'])).first()
         if not item:
             abort(404, message="No existe el item")
         else:
@@ -76,14 +85,16 @@ class Service():
 
     @staticmethod
     @marshal_with(resource_fields)
-    def filterQuality(Item, itemQuality):
-        items = Item.objects(quality=itemQuality)
+    def filterQuality(itemQuality):
+        db = get_db()
+        items = g.Item.objects(quality=itemQuality)
         return Service.check(items)
 
     @staticmethod
     @marshal_with(resource_fields)
-    def filterSellIn(Item, itemSellIn):
-        items = Item.objects(sell_in__lte=itemSellIn)
+    def filterSellIn(itemSellIn):
+        db = get_db()
+        items = g.Item.objects(sell_in__lte=itemSellIn)
         return Service.check(items)
 
     @staticmethod

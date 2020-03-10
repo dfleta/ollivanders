@@ -14,10 +14,13 @@ from resources.sellin import SellIn
 # from repository.db import initialize_db
 # from flask_mongoengine import MongoEngine
 # from repository.models import Item
-from repository.db import *
+
+from repository import db_atlas
 
 app = Flask(__name__)
 CORS(app)
+
+db_atlas.init_app(app)
 
 
 # API REST

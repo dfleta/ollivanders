@@ -1,4 +1,4 @@
-from repository.repo import SingletonOllivander
+# from repository.repo import SingletonOllivander
 
 
-tienda = SingletonOllivander.crearTienda()
+# tienda = SingletonOllivander.crearTienda()

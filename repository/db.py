@@ -9,10 +9,10 @@ client = MongoClient()
 
 # obteniendo una bbdd
 client.drop_database('ollivanders')
-db = client['ollivanders']
-# db = client.ollivanders
+# db = client['ollivanders']
+db = client.ollivanders
 
-# Getting a Collection¶
+# Getting a Collection
 collection = db['inventario']
 
 # mongoengine: how to connect to our instance of mongod:
@@ -39,4 +39,4 @@ def initdb():
         item.save()
 
 
-initdb()
+# initdb()

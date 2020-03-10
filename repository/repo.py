@@ -18,6 +18,18 @@ class Factory():
     rutaAccesoFichero = "domain/stdout_bug_conjured.gr"
 
     @staticmethod
+    def loadInventario():
+        matrizCasosTest = []
+
+        matrizCasosTest = accesoCasosTexttest(
+            matrizCasosTest, Factory.rutaAccesoFichero)
+
+        items = Factory.extraerItemsIventario(matrizCasosTest)
+
+        return items
+
+
+    @staticmethod
     def initRepo():
 
         matrizCasosTest = []
