@@ -1,3 +1,5 @@
+# Conectar la app a BBDD mongo local
+
 from pymongo import MongoClient
 from mongoengine import *
 from repository.models import Item

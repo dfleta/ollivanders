@@ -69,3 +69,45 @@
 3. Genera el fichero de distribución:
 
     `$ python setup.py bdist_wheel` 
+
+
+### Ejecuta la aplicación
+
+0. Antes has de dispone de una cuenta en Mongo Atlas y un cluster disponible. Crea una usuaria con su password correspondiente. Luego, obtén el drive para y escribe la URI en el fichero `db_atlas.py` en:
+
+    ```Python
+    connect(
+        host='mongodb+srv://<usuaria>:<password>@cluster0-ud3ms.mongodb.net/test?retryWrites=true&w=majority')
+    ```
+
+    Esto conectará tu app con la base de datos `test` que por defecto ofrece MongoDB. 
+    Si dispones de otra base de datos en Atlas, sustituye `test` por su nombre en la URI.
+
+1. Activa el entorno virtual:
+
+    `$ source venv/bin/activate`
+
+2. Configura las variables de entorno FLASK:
+
+    ```Bash
+    `$ export FLASK_APP=controller.py`
+    `$ export FLASK_EN=development`
+    ```
+3. Comprueba que tendrás acceso a MongoDB desde Atlas:
+
+    `$ curl portquiz.net:27017`
+
+3. Si es la primera vez que arrancas la app y no dispones de items en la base de datos, inicializala con el comando:
+
+    `$ flask init-db`
+
+4. Arranca la app para que corra en el localhost:
+
+    `$ flask run --host 0.0.0.0`
+
+    Comprueba en tu navegador o con `curl` que corre en:
+    `http://127.0.0.1:5000/`
+
+5. Si quieres que esté disponible en la red local en la ip de tu máquina, ejecuta:
+
+    `$ flask run --host 0.0.0.0`

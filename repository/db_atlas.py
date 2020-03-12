@@ -13,12 +13,6 @@ from flask import g
 # proporciona además la ip pública desde la que
 # te conectas al servicio de Atlas
 
-# https://api.mongodb.com/python/current/atlas.html
-# https://api.mongodb.com/python/current/examples/tls.html
-# https://stackoverflow.com/questions/59254973/flask-mongoengine-how-to-change-configure-database
-
-# client = MongoClient("mongodb+srv://ollivanders:<ollivanders>@cluster0-ud3ms.mongodb.net/test?retryWrites=true&w=majority", ssl=True)
-
 
 def get_db():
     if 'db' not in g:
