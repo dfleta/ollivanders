@@ -5,7 +5,7 @@ from flask_restful import fields, marshal_with, abort
 from mongoengine.queryset.visitor import Q
 from repository.db_atlas import get_db
 
-from domain.test_gilded_rose import crearObjetoItem
+from repository.repo import Factory
 
 
 class Service():
@@ -32,7 +32,7 @@ class Service():
     def updateQuality():
         db = get_db()
         for item in g.Item.objects():
-            itemObject = crearObjetoItem(
+            itemObject = Factory.crearObjetoItem(
                 [item.name, item.sell_in, item.quality])
             itemObject.update_quality()
             item.sell_in = itemObject.sell_in
