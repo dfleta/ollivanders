@@ -90,7 +90,7 @@ def crearFicheroCasosTest(ficheroVolcadoCasosTest, matrizCasosTest):
             raise ValueError
         stdout = open(ficheroVolcadoCasosTest, 'w')
     except ValueError:
-            print("La ruta de acceso al fichero ha de ser un string")
+        print("La ruta de acceso al fichero ha de ser un string")
     else:
         for (offset, casosTestDia) in enumerate(matrizCasosTest):
             stdout.write('-' * 5 + " Dia %d: " % offset + '-' * 5 + '\n')
@@ -112,8 +112,8 @@ def mostrarCasosTest(matrizCasosTest):
 
 if __name__ == "__main__":
 
-    rutaAccesoFichero = "./stdout.gr"
-    # rutaAccesoFichero = "stdout_bug_conjured.gr"
+    # rutaAccesoFichero = "./stdout.gr"
+    rutaAccesoFichero = "stdout_bug_conjured.gr"
 
     matrizCasosTest = []
 

@@ -1,6 +1,12 @@
 
-from domain.types import *
-from domain.accesoCasosTexttest import *
+# Ejecutar este fichero desde consola
+# situado en su directorio propio, para
+# evitar que no encuentre la ruta al fichero
+# La ruta de los imports ha de ser relativa.
+# Ignorar el warning.
+
+from types import *
+from accesoCasosTexttest import *
 
 
 def extraerItemsIventario(matrizCasosTest):
@@ -56,7 +62,9 @@ def test(tienda, estadoInventario):
 
 if __name__ == "__main__":
 
-    rutaAccesoFichero = "stdout_bug_conjured.gr"
+    from types import GildedRose
+
+    rutaAccesoFichero = "./stdout_bug_conjured.gr"
 
     matrizCasosTest = []
 
