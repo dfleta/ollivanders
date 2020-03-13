@@ -19,9 +19,10 @@ def get_db():
         # connect() devuelve una referencia en el contexto global
         # que ahora guardamos en el objeto global de flask g
         # Conectarse a Mongo Atlas con mongoengine
-        # En la URI, /test? es la bbdd
+        # En la URI, /ollivanders? es la bbdd
         g.db = connect(
-                    host='URI'
+                    'ollivanders',
+                    host='mongodb+srv://ollivanders:ollivanders@cluster0-ud3ms.mongodb.net/ollivanders?retryWrites=true&w=majority'
                 )
         # Item necesita encontrar la referencia la conexión
         # devuelta por connect()
