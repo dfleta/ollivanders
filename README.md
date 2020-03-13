@@ -77,7 +77,7 @@
 
     ```Python
     connect(
-        host='mongodb+srv://<usuaria>:<password>@cluster0-ud3ms.mongodb.net/test?retryWrites=true&w=majority')
+        host='URI')
     ```
 
     Esto conectará tu app con la base de datos `test` que por defecto ofrece MongoDB. 
