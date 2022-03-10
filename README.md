@@ -195,6 +195,11 @@ Para forzar a `pip-compile` a actualizar todos los paquetes en el `requirements.
 `pip-compile --upgrade`
 
 
+Sincronizar venv con requirements:
+
+`$ pip-sync`
+
+
 #### Recursos sobre dependency management
 
 https://github.com/jazzband/pip-tools
@@ -216,4 +221,24 @@ $ docker container stop ollivanders_pin
 # Comprobar si .dockerignore ha hecho su trabajo
 $ docker exec -it ollivanders_pin sh
 $ ls
+```
+
+# Uso
+
+```sh
+curl -w "\n" http://localhost:5000/inventario -H "Content-Type: application/x-www-form-urlencoded"
+
+curl -w "\n" http://localhost:5000/inventario -H "Content-Type: application/json"
+
+curl -d '{"name": "Sombrero seleccionador", "sell_in": 80, "quality": 30}' -H "Content-Type: application/json" -X POST http://localhost:5000/
+
+curl -d name="Conjured Mana Cake" -d sell_in=3 -d quality=6 http://127.0.0.1:5000/items -X POST
+
+curl -d name="Conjured Mana Cake" -d sell_in=3 -d quality=6 http://127.0.0.1:5000/items -X DELETE
+
+curl -w "\n" http://localhost:5000/items/name/Aged%20Brie -H "Content-Type: application/json" -v
+
+curl -w "\n" http://localhost:5000/items/quality/80 -H "Content-Type: application/json" -v
+
+curl -w "\n" http://localhost:5000/items/sellin/0 -H "Content-Type: application/json"
 ```
