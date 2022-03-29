@@ -199,6 +199,23 @@ Sincronizar venv con requirements:
 
 `$ pip-sync`
 
+#### dev dependencies
+
+Crear el fichero `dev-requirements.txt` incluyendo las dependencias para el desarrollo de la app.
+En la primera línea escribir `-c requirements.txt` para constrñir los dev requirements a los paquetes ya seleciconados para producción en `requirements.txt`.
+
+```sh
+# dev-requirements.in
+-c requirements.txt
+pytest
+
+$ pip-compile dev-requirements.in
+```
+
+Para instalar las dependencias dev y producción:
+
+`pip-sync requirements.txt dev-requirements.txt`
+
 
 #### Recursos sobre dependency management
 
