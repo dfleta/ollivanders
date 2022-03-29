@@ -9,6 +9,8 @@ from resources.items import Items
 from resources.quality import Quality
 from resources.sellin import SellIn
 
+from factory import create_app
+
 # from config import *
 
 # from repository.db import initialize_db
@@ -19,9 +21,9 @@ from repository import db_atlas
 
 app = Flask(__name__)
 CORS(app)
-
 db_atlas.init_app(app)
 
+# app = create_app()
 
 # API REST
 api = Api(app, catch_all_404s=True)
@@ -34,4 +36,4 @@ api.add_resource(Quality, '/items/quality/<itemQuality>')
 api.add_resource(SellIn, '/items/sellin/<itemSellIn>')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
